@@ -1,1 +1,15 @@
-
+# A sample YAML file that demonstrates the use of DSC configuration in Windows 11 via Winget Config.
+# https://woshub.com/winget-dsc-configure/
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0  
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Mozilla.Firefox
+      directives:
+        description: Installing Mozilla Firefox
+        allowPrerelease: false
+        securityContext: elevated
+      settings:
+        id: "Mozilla.Firefox"
+        source: winget     
