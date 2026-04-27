@@ -1,1 +1,217 @@
+# A sample YAML file that demonstrates the use of DSC configuration in Windows 11 via Winget Config.
+# https://woshub.com/winget-dsc-configure/
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0  
+  resources:
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      directives:
+        description: Enable Developer Mode
+        allowPrerelease: false
+      settings:
+        Ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: InstallVSLocator
+      directives:
+        description: Install VS Locator
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Microsoft.VisualStudio.Locator"
+        source: winget     
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Chocolatey
+      directives:
+        description: Install Chocolatey
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Chocolatey.Chocolatey"
+        source: winget
+        
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: wsl
+      directives:
+        description: Install Windows Subsystem for Linux
+        allowPrerelease: false
+        securityContext: elevated
+      settings:
+        id: "Microsoft.WSL"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vs2022Package
+      directives:
+        description: Install Microsoft Visual Studio 2022 Enterprise
+        allowPrerelease: false
+        securityContext: elevated
+      settings:
+        id: "Microsoft.VisualStudio.2022.Enterprise"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vs2026Package
+      directives:
+        description: Install Microsoft Visual Studio 2026 Enterprise
+        allowPrerelease: false
+        securityContext: elevated
+      settings:
+        id: "Microsoft.VisualStudio.Enterprise"
+        source: winget
+
+    - resource: Microsoft.VisualStudio.DSC/VSComponents
+      id: vs2022Workloads
+      dependsOn:
+        - vs2022Package
+      directives:
+        description: vs2022Workloads
+        allowPrerelease: false
+      settings:
+        productId: Microsoft.VisualStudio.Product.Enterprise
+        channelId: VisualStudio.17.Release
+        components:
+          - Microsoft.VisualStudio.Workload.ManagedDesktop
+          - Microsoft.VisualStudio.Workload.NetWeb
+        IncludeRecommended: True
+
+      - resource: Microsoft.VisualStudio.DSC/VSComponents
+      id: vs2026Workloads
+      dependsOn:
+        - vs2026Package
+      directives:
+        description: vs2026Workloads
+        allowPrerelease: false
+      settings:
+        productId: Microsoft.VisualStudio.Product.Enterprise
+        channelId: VisualStudio.18.Stable
+        components:
+          - Microsoft.VisualStudio.Workload.ManagedDesktop
+          - Microsoft.VisualStudio.Workload.NetWeb
+        IncludeRecommended: True
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk31
+      settings:
+        id: Microsoft.DotNet.SDK.3_1
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk50
+      settings:
+        id: Microsoft.DotNet.SDK.5
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk60
+      settings:
+        id: Microsoft.DotNet.SDK.6
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk70
+      settings:
+        id: Microsoft.DotNet.SDK.7
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk80
+      settings:
+        id: Microsoft.DotNet.SDK.8
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk90
+      settings:
+        id: Microsoft.DotNet.SDK.9
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnetSdk10
+      settings:
+        id: Microsoft.DotNet.SDK.10
+        source: winget
+        ensure: Present
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: SQLMgmtStudio22
+      directives:
+        description: Install SQL Mgmt Studio 22
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Microsoft.SQLServerManagementStudio.22"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: AzureCosmosEmulator
+      directives:
+        description: Install Azure Cosmos Emulator
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Microsoft.Azure.CosmosEmulator"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DockerDesktop
+      directives:
+        description: Install Docker Desktop
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Docker.DockerDesktop"
+        source: winget
+
+     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GitHubLFS
+      directives:
+        description: Install GitHubLFS
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "GitHub.GitLFS"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Python312
+      directives:
+        description: Install Python 3.12
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Python.Python.3.12"
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Volta
+      directives:
+        description: Install Volta
+        allowPrerelease: false
+        securityContext: current
+      settings:
+        id: "Volta.Volta"
+        source: winget
+
+     - resource: PSDscResources/Script
+      id: SQLExpressChocolatey
+      dependsOn:
+        - Chocolatey
+      directives:
+        description: Install SQL Express via Chocolatey
+        allowPrerelease: true
+      settings:
+        GetScript: |
+            #"state"
+        TestScript: |
+            return $false
+        SetScript: |
+          choco install sql-server-express -y;
 
