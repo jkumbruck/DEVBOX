@@ -1,1 +1,23 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  resources:
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      directives:
+        description: Install extension for Prettier VS Code
+        allowPrerelease: true
+      settings:
+        Name: esbenp.prettier-vscode
 
+    - resource: PSDscResources/Script
+      id: Ubuntu
+      directives:
+        description: Install the Ubuntu distribution
+        allowPrerelease: true
+      settings:
+        GetScript: |
+            #"state"
+        TestScript: |
+            return $false
+        SetScript: |
+          wsl --install -d Ubuntu --no-launch;
+  configurationVersion: 0.2.0
