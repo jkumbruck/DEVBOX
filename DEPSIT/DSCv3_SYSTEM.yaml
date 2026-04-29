@@ -1,1 +1,217 @@
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/v3/config/document.json
+resources:
+  - name: Microsoft.WSL
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.WSL
+      source: winget
 
+  - name: Chocolatey.Chocolatey
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Chocolatey.Chocolatey
+      source: winget
+
+  - name: Microsoft.VisualStudio.2022.Enterprise
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudio.2022.Enterprise
+      source: winget
+
+  - name: Microsoft.VisualStudio.Enterprise
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudio.Enterprise
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.3_1
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.3_1
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.5
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.5
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.6
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.6
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.7
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.7
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.8
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.8
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.9
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.9
+      source: winget
+
+  - name: Microsoft.DotNet.SDK.10
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.DotNet.SDK.10
+      source: winget
+
+  - name: Microsoft.SQLServerManagementStudio.22
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.SQLServerManagementStudio.22
+      source: winget
+
+  - name: Microsoft.Azure.CosmosEmulator
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.Azure.CosmosEmulator
+      source: winget
+
+  - name: Docker.DockerDesktop
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Docker.DockerDesktop
+      source: winget
+
+  - name: GitHub.GitLFS
+    type: Microsoft.WinGet/Package
+    properties:
+      id: GitHub.GitLFS
+      source: winget
+
+  - name: OpenJS.NodeJS.LTS
+    type: Microsoft.WinGet/Package
+    properties:
+      id: OpenJS.NodeJS.LTS
+      source: winget
+
+  - name: Volta.Volta
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Volta.Volta
+      source: winget
+
+  - name: Use Windows PowerShell resources
+    type: Microsoft.Windows/WindowsPowerShell
+    properties:
+      resources:
+        - name: Microsoft SQL Express via chocolatey
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              New-Item -Path "c:\temp\myfile.txt" -ItemType File -Force
+              # Refresh PATH so choco is available
+              $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+              # Install SQL server Express via Chocolatey
+              choco install sql-server-express -y
+
+        - name: Microsoft VisualStudio Locator via chocolatey
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              # Refresh PATH so choco is available
+              $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+              # Install Microsoft VisualStudio Locator via Chocolatey
+              choco install vswhere -y
+
+        - name: Python 3.12 via chocolatey
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              New-Item -Path "c:\temp\myfile.txt" -ItemType File -Force
+              # Refresh PATH so choco is available
+              $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+              # Install Python 3.12 via Chocolatey
+              choco install python --version=3.12.10 -y
+
+        - name: vs2026 workloads
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              # Define Visual Studio Installer paths as variables
+              $vsInstallerDir = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer"
+              $vsInstallerExe = Join-Path $vsInstallerDir "vs_installer.exe"
+              $productId= "Microsoft.VisualStudio.Product.Enterprise"
+              $channelId= "VisualStudio.18.Release"
+              # Install Visual Studio 2026 ManagedDesktop & Netweb workloads
+              $process = Start-Process `
+                -FilePath $vsInstallerExe `
+                -ArgumentList `
+                    "modify", `
+                    "--productId", $productId, `
+                    "--channelId", $channelId, `
+                    "--add", "Microsoft.VisualStudio.Workload.ManagedDesktop" , `
+                    "--add", "Microsoft.VisualStudio.Workload.NetWeb" , `
+                    "--includeRecommended", `
+                    "--quiet", `
+                    "--norestart" `
+                -NoNewWindow `
+                -PassThru `
+                -Wait
+
+        - name: vs2022 workloads
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              # Define Visual Studio Installer paths as variables
+              $vsInstallerDir = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer"
+              $vsInstallerExe = Join-Path $vsInstallerDir "vs_installer.exe"
+              $productId= "Microsoft.VisualStudio.Product.Enterprise"
+              $channelId= "VisualStudio.17.Release"
+              # Install Visual Studio 2022 ManagedDesktop & Netweb workloads
+              $process = Start-Process `
+                -FilePath $vsInstallerExe `
+                -ArgumentList `
+                    "modify", `
+                    "--productId", $productId, `
+                    "--channelId", $channelId, `
+                    "--add", "Microsoft.VisualStudio.Workload.ManagedDesktop" , `
+                    "--add", "Microsoft.VisualStudio.Workload.NetWeb" , `
+                    "--includeRecommended", `
+                    "--quiet", `
+                    "--norestart" `
+                -NoNewWindow `
+                -PassThru `
+                -Wait
+                
+        - name: reboot
+          type: PSDesiredStateConfiguration/Script
+          properties:
+            GetScript: |
+              @{Result=$true}
+            TestScript:  |
+              $false
+            SetScript: |
+              # reboot machine
+              shutdown /r /t 60 /f       
