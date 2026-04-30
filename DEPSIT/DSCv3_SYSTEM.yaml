@@ -221,12 +221,4 @@ resources:
             SetScript: |
               # reboot machine
               shutdown /r /t 60 /f
-              
-  - name: DSCRegistryStatus
-    type: Microsoft.Windows/Registry
-    properties:
-      keyPath:   HKLM\SOFTWARE\DSC
-      valueName: Status
-      valueData:
-        String: Finished
 
