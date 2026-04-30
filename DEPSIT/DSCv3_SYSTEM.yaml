@@ -220,4 +220,13 @@ resources:
               $false
             SetScript: |
               # reboot machine
-              shutdown /r /t 60 /f       
+              shutdown /r /t 60 /f
+              
+  - name: jos
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath:   HKLM\SOFTWARE\DSC
+      valueName: Status
+      valueData:
+        String: Finished
+
