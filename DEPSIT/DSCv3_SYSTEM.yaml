@@ -5,6 +5,12 @@ resources:
     properties:
       id: Microsoft.WSL
       source: winget
+      
+  - name: Microsoft.VisualStudioCode
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Microsoft.VisualStudioCode
+      source: winget
 
   - name: Chocolatey.Chocolatey
     type: Microsoft.WinGet/Package
