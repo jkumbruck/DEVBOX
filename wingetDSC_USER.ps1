@@ -3,8 +3,8 @@
 #Repair-WinGetPackageManager
 #Install-Module Microsoft.WinGet.DSC -Force -Repository PSGallery
 #winget configure --enable
-Invoke-WebRequest -UseBasicParsing -Uri https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile "${env:temp}\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-Add-AppxPackage -Path "${env:temp}\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+#Invoke-WebRequest -UseBasicParsing -Uri https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile "${env:temp}\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+Add-AppxPackage -Path "C:\Windows\Temp\WinGet-Stage\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 winget configure --file "C:\Windows\Temp\devbox\DEPSIT\joeri.yaml" --accept-configuration-agreements
 Clear-Host
 
