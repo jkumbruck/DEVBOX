@@ -20,4 +20,14 @@ properties:
             return $false
         SetScript: |
           wsl --install -d Ubuntu --no-launch;
+          
+    - resource: PSDscResources/Registry
+      directives:
+        description: Add DSC status Key
+      settings:
+        Key: 'HKCU:\SOFTWARE\DSC'
+        Ensure: Present
+        ValueName: Status
+        ValueType: String
+        ValueData: Finished
   configurationVersion: 0.2.0
