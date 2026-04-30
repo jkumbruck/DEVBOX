@@ -1,4 +1,4 @@
-winget configure --file "C:\Windows\Temp\joeri.yaml" --accept-configuration-agreements
+winget configure --file "C:\Windows\Temp\devbox\DEPSIT\joeri.yaml" --accept-configuration-agreements
 Clear-Host
 
 Write-Host "====================================================="
