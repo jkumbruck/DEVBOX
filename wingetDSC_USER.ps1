@@ -1,7 +1,4 @@
-Install-PackageProvider -Name NuGet -Force
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery
-Repair-WinGetPackageManager
-Install-Module Microsoft.WinGet.DSC -Force -Repository PSGallery
+winget configure -enable
 winget configure --file "C:\Windows\Temp\devbox\DEPSIT\joeri.yaml" --accept-configuration-agreements
 Clear-Host
 
