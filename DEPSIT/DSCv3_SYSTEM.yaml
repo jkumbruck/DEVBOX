@@ -222,7 +222,7 @@ resources:
               # reboot machine
               shutdown /r /t 60 /f
               
-  - name: jos
+  - name: DSCRegistryStatus
     type: Microsoft.Windows/Registry
     properties:
       keyPath:   HKLM\SOFTWARE\DSC
