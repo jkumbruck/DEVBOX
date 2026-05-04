@@ -4,7 +4,7 @@
 #Install-Module Microsoft.WinGet.DSC -Force -Repository PSGallery
 #winget configure --enable
 #Invoke-WebRequest -UseBasicParsing -Uri https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile "${env:temp}\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-Add-AppxPackage -Path "C:\Windows\Temp\WinGet-Stage\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+Add-AppxPackage -Path "C:\temp\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 # Wait until the package appears in Get-AppxPackage
 while (-not (Get-AppxPackage -Name "Microsoft.DesktopAppInstaller")) {
     Start-Sleep -Seconds 1
@@ -13,7 +13,7 @@ while (-not (Get-AppxPackage -Name "Microsoft.DesktopAppInstaller")) {
 while (Get-Process -Name AppXDeploymentServer -ErrorAction SilentlyContinue) {
     Start-Sleep -Seconds 1
 }
-winget configure --file "C:\Windows\Temp\devbox\DEPSIT\joeri.yaml" --accept-configuration-agreements
+winget configure --file "C:\temp\joeri.yaml" --accept-configuration-agreements
 Clear-Host
 
 Write-Host "====================================================="
