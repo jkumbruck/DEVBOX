@@ -204,17 +204,6 @@ resources:
                 -NoNewWindow `
                 -PassThru `
                 -Wait
-                
-        - name: reboot
-          type: PSDesiredStateConfiguration/Script
-          properties:
-            GetScript: |
-              @{Result=$true}
-            TestScript:  |
-              $false
-            SetScript: |
-              # reboot machine
-              shutdown /r /t 60 /f
               
   - name: DSCRegistryStatus
     type: Microsoft.Windows/Registry
