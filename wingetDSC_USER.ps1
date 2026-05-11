@@ -13,5 +13,5 @@ while (-not (Get-AppxPackage -Name "Microsoft.DesktopAppInstaller")) {
 while (Get-Process -Name AppXDeploymentServer -ErrorAction SilentlyContinue) {
     Start-Sleep -Seconds 1
 }
-winget configure --file "C:\temp\joeri.yaml" --accept-configuration-agreements
+winget configure --file "C:\temp\wingetDSC_USER_CONFIG.yaml" --accept-configuration-agreements
 Exit
