@@ -41,7 +41,7 @@ properties:
       settings:
         Key: 'HKCU:\SOFTWARE\DSC'
         Ensure: Present
-        ValueName: Status
+        ValueName: Status2
         ValueType: String
         ValueData: Finished
   configurationVersion: 0.2.0
