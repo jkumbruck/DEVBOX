@@ -12,6 +12,12 @@ resources:
       id: Chocolatey.Chocolatey
       source: winget
 
+  - name: Mozilla.Firefox
+    type: Microsoft.WinGet/Package
+    properties:
+      id: Mozilla.Firefox
+      source: winget
+
   - name: Microsoft.VisualStudio.2022.Enterprise
     type: Microsoft.WinGet/Package
     properties:
