@@ -71,7 +71,8 @@ resources:
     properties:
       id: Microsoft.SQLServerManagementStudio.22
       source: winget
-
+      Ensure: Absent
+      
   - name: Microsoft.Azure.CosmosEmulator
     type: Microsoft.WinGet/Package
     properties:
@@ -209,6 +210,6 @@ resources:
     type: Microsoft.Windows/Registry
     properties:
       keyPath:   HKLM\SOFTWARE\DSC
-      valueName: Status
+      valueName: Status1
       valueData:
         String: Finished
