@@ -8,6 +8,20 @@ properties:
       settings:
         Name: esbenp.prettier-vscode
 
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      directives:
+        description: Install extension for ms-azuretools.vscode-bicep
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-bicep
+
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      directives:
+        description: Install extension for ms-vscode.PowerShell 
+        allowPrerelease: true
+      settings:
+        Name: ms-vscode.PowerShell
+        
     - resource: PSDscResources/Script
       id: Ubuntu
       directives:
