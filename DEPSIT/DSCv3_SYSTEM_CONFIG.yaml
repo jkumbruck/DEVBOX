@@ -77,7 +77,6 @@ resources:
     properties:
       id: Microsoft.SQLServerManagementStudio.22
       source: winget
-      Ensure: Absent
       
   - name: Microsoft.Azure.CosmosEmulator
     type: Microsoft.WinGet/Package
