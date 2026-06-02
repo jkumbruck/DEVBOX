@@ -216,6 +216,6 @@ resources:
     type: Microsoft.Windows/Registry
     properties:
       keyPath:   HKLM\SOFTWARE\DSC
-      valueName: Status1
+      valueName: Version
       valueData:
-        String: Finished
+        String: 1
